@@ -1,0 +1,109 @@
+/**
+ * GitHub Pages (Docsify) — 테마(vue / dark / buble 등)를 바꿔도
+ * 소스·인라인 코드가 읽을 수 있게 고정·중립 스타일.
+ * index.html에서 테마 CSS 다음에 로드.
+ */
+
+/* ---------- 블록 코드: 항상 다크 패널 (문서 테마와 무관) ---------- */
+.markdown-section pre {
+  background: #1e1e1e !important;
+  border: 1px solid #3c3c3c;
+  border-radius: 8px;
+  padding: 1em 1.1em !important;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+.markdown-section pre > code {
+  background: transparent !important;
+  color: #d4d4d4 !important;
+  font-size: 0.88em;
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Prism / Docsify 구문 강조 (VS Code Dark+ 계열) */
+.markdown-section pre .token.comment,
+.markdown-section pre .token.prolog,
+.markdown-section pre .token.doctype,
+.markdown-section pre .token.cdata {
+  color: #6a9955;
+}
+
+.markdown-section pre .token.punctuation {
+  color: #d4d4d4;
+}
+
+.markdown-section pre .token.property,
+.markdown-section pre .token.tag,
+.markdown-section pre .token.boolean,
+.markdown-section pre .token.number,
+.markdown-section pre .token.constant,
+.markdown-section pre .token.symbol,
+.markdown-section pre .token.deleted {
+  color: #569cd6;
+}
+
+.markdown-section pre .token.selector,
+.markdown-section pre .token.attr-name,
+.markdown-section pre .token.string,
+.markdown-section pre .token.char,
+.markdown-section pre .token.builtin,
+.markdown-section pre .token.inserted {
+  color: #ce9178;
+}
+
+.markdown-section pre .token.operator,
+.markdown-section pre .token.entity,
+.markdown-section pre .token.url,
+.markdown-section pre .language-css .token.string,
+.markdown-section pre .style .token.string {
+  color: #d4d4d4;
+}
+
+.markdown-section pre .token.atrule,
+.markdown-section pre .token.attr-value,
+.markdown-section pre .token.keyword {
+  color: #c586c0;
+}
+
+.markdown-section pre .token.function,
+.markdown-section pre .token.class-name {
+  color: #dcdcaa;
+}
+
+.markdown-section pre .token.regex,
+.markdown-section pre .token.important,
+.markdown-section pre .token.variable {
+  color: #9cdcfe;
+}
+
+.markdown-section pre .token.important,
+.markdown-section pre .token.bold {
+  font-weight: bold;
+}
+
+.markdown-section pre .token.italic {
+  font-style: italic;
+}
+
+.markdown-section pre code:not([class*="language-"]) {
+  color: #d4d4d4 !important;
+}
+
+/* ---------- 인라인 코드: 본문 글자색 따름 + 중립 배경 (라이트·다크 공통) ---------- */
+.markdown-section :not(pre) > code {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  font-size: 0.9em;
+  padding: 0.2em 0.45em;
+  border-radius: 6px;
+  color: inherit !important;
+  background: rgba(128, 128, 128, 0.14) !important;
+  border: 1px solid rgba(128, 128, 128, 0.28);
+}
+
+/* 링크 안 인라인 코드 */
+.markdown-section a code {
+  color: inherit !important;
+}
