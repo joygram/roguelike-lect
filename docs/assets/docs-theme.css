@@ -1,0 +1,188 @@
+/**
+ * Docsify — 테마 전환 + 검색/콤보/인라인코드 연동
+ * html[data-theme="vue"|"dark"|"buble"|"pure"|"dolphin"]
+ */
+
+/* ---------- 테마 툴바 ---------- */
+.theme-toolbar {
+  position: fixed;
+  top: 10px;
+  right: 14px;
+  z-index: 100001;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-family: system-ui, sans-serif;
+  pointer-events: auto;
+}
+
+.theme-toolbar label {
+  margin: 0;
+  white-space: nowrap;
+  font-weight: 600;
+  user-select: none;
+}
+
+.theme-toolbar select {
+  cursor: pointer;
+  min-width: 9.5em;
+  padding: 6px 28px 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.35;
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 10px;
+}
+
+/* 라이트 계열 */
+html[data-theme="vue"] .theme-toolbar label,
+html[data-theme="buble"] .theme-toolbar label,
+html[data-theme="pure"] .theme-toolbar label,
+html[data-theme="dolphin"] .theme-toolbar label {
+  color: #364149;
+  text-shadow: 0 0 1px rgba(255,255,255,0.8);
+}
+
+html[data-theme="vue"] .theme-toolbar select,
+html[data-theme="buble"] .theme-toolbar select,
+html[data-theme="pure"] .theme-toolbar select,
+html[data-theme="dolphin"] .theme-toolbar select {
+  color: #2c3e50;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.18);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M3 4.5L6 8l3-3.5'/%3E%3C/svg%3E");
+}
+
+html[data-theme="vue"] .theme-toolbar select:hover,
+html[data-theme="buble"] .theme-toolbar select:hover,
+html[data-theme="pure"] .theme-toolbar select:hover,
+html[data-theme="dolphin"] .theme-toolbar select:hover {
+  border-color: rgba(0,0,0,0.28);
+}
+
+html[data-theme="vue"] .theme-toolbar select option,
+html[data-theme="buble"] .theme-toolbar select option,
+html[data-theme="pure"] .theme-toolbar select option,
+html[data-theme="dolphin"] .theme-toolbar select option {
+  background: #fff;
+  color: #2c3e50;
+}
+
+/* 다크 */
+html[data-theme="dark"] .theme-toolbar label {
+  color: #c8c8c8;
+}
+
+html[data-theme="dark"] .theme-toolbar select {
+  color: #e6e6e6;
+  background-color: #2d2d2d;
+  border: 1px solid #555;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ccc' d='M3 4.5L6 8l3-3.5'/%3E%3C/svg%3E");
+}
+
+html[data-theme="dark"] .theme-toolbar select option {
+  background: #2d2d2d;
+  color: #e6e6e6;
+}
+
+/* 본문 영역 — 라이트에서 툴바가 잘 보이게 */
+.markdown-section {
+  padding-top: 0.5rem;
+}
+
+/* ---------- 다크 테마: 검색·사이드바 보조 ---------- */
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .sidebar-toggle {
+  border-color: #444;
+}
+
+html[data-theme="dark"] .search .input-wrap input,
+html[data-theme="dark"] .sidebar .search input {
+  background: #2d2d2d !important;
+  color: #e0e0e0 !important;
+  border-color: #555 !important;
+}
+
+html[data-theme="dark"] .search .input-wrap input::placeholder {
+  color: #888;
+}
+
+html[data-theme="dark"] .search .results-panel {
+  background: #252525 !important;
+  border: 1px solid #444 !important;
+  color: #ddd !important;
+}
+
+html[data-theme="dark"] .search .matching-post {
+  border-color: #3a3a3a !important;
+}
+
+html[data-theme="dark"] .search .matching-post h2 {
+  color: #7eb6ff !important;
+}
+
+html[data-theme="dark"] .search .matching-post p {
+  color: #bbb !important;
+}
+
+html[data-theme="dark"] .sidebar ul li a {
+  color: #c4c4c4;
+}
+
+html[data-theme="dark"] .sidebar ul li.active > a {
+  color: #7eb6ff;
+  font-weight: 600;
+}
+
+html[data-theme="dark"] .app-sub-sidebar li:before {
+  border-color: #666;
+}
+
+/* 라이트 테마 검색 패널 (일부 테마에서 대비) */
+html[data-theme="vue"] .search .results-panel,
+html[data-theme="buble"] .search .results-panel,
+html[data-theme="pure"] .search .results-panel,
+html[data-theme="dolphin"] .search .results-panel {
+  background: #fff !important;
+  border: 1px solid rgba(0,0,0,0.12) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+html[data-theme="vue"] .search .matching-post h2,
+html[data-theme="buble"] .search .matching-post h2,
+html[data-theme="pure"] .search .matching-post h2,
+html[data-theme="dolphin"] .search .matching-post h2 {
+  color: #42b983;
+}
+
+/* ---------- 인라인 코드 — 테마별 ---------- */
+html[data-theme="dark"] .markdown-section :not(pre) > code {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #e6c07b !important;
+}
+
+html[data-theme="vue"] .markdown-section :not(pre) > code,
+html[data-theme="buble"] .markdown-section :not(pre) > code,
+html[data-theme="pure"] .markdown-section :not(pre) > code,
+html[data-theme="dolphin"] .markdown-section :not(pre) > code {
+  background: rgba(0, 0, 0, 0.06) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #c7254e !important;
+}
+
+html[data-theme="vue"] .markdown-section a code,
+html[data-theme="buble"] .markdown-section a code,
+html[data-theme="pure"] .markdown-section a code,
+html[data-theme="dolphin"] .markdown-section a code {
+  color: inherit !important;
+}
+
+html[data-theme="dark"] .markdown-section a code {
+  color: inherit !important;
+}

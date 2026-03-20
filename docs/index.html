@@ -3,10 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Unity 2D 플랫포머 개발 가이드</title>
+  <title>Unity 2D 플랫포머 개발 문서</title>
   <meta name="description" content="로그라이크·플랫포머 프로젝트 문서" />
-  <!-- 테마 변경 시: 아래 테마 링크만 바꾸면 됨. 코드 색은 assets/github-pages-code.css가 고정 -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" />
+  <script>
+    (function () {
+      var map = { vue: 'vue', dark: 'dark', buble: 'buble', pure: 'pure', dolphin: 'dolphin' };
+      var k = localStorage.getItem('docsify-theme') || 'vue';
+      if (!map[k]) k = 'vue';
+      var l = document.createElement('link');
+      l.rel = 'stylesheet';
+      l.id = 'docsify-theme-link';
+      l.href = 'https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/' + map[k] + '.css';
+      document.documentElement.setAttribute('data-theme', k);
+      document.head.appendChild(l);
+    })();
+  </script>
+  <link rel="stylesheet" href="assets/docs-theme.css" />
   <link rel="stylesheet" href="assets/github-pages-code.css" />
   <style>
     .markdown-section { max-width: 900px; }
@@ -14,7 +26,23 @@
   </style>
 </head>
 <body>
+  <div class="theme-toolbar" aria-label="테마 선택">
+    <label for="docsify-theme-select">테마</label>
+    <select id="docsify-theme-select" title="문서 테마">
+      <option value="vue">Vue (밝음)</option>
+      <option value="buble">Buble (밝음)</option>
+      <option value="pure">Pure (밝음)</option>
+      <option value="dolphin">Dolphin (밝음)</option>
+      <option value="dark">Dark</option>
+    </select>
+  </div>
   <div id="app"></div>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script>
+    Prism.plugins.autoloader.languages_path =
+      'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
+  </script>
   <script>
     (function () {
       var path = location.pathname || '/';
@@ -23,22 +51,70 @@
       if (seg.length > 0 && seg[0] !== 'index.html') {
         basePath = '/' + seg[0] + '/';
       }
+      var themeKeys = ['vue', 'dark', 'buble', 'pure', 'dolphin'];
       window.$docsify = {
-        name: '개발 가이드',
+        name: '개발 문서',
         repo: '',
         loadSidebar: true,
         subMaxLevel: 3,
-        homepage: 'web-홈.md',
+        homepage: '00-준비.md',
         basePath: basePath,
+        /** 사이드바·페이지네이션(다음/이전)으로 문서 바뀔 때 맨 위로 (기본은 스크롤 유지라 중간처럼 보임) */
+        auto2top: true,
         search: {
           paths: 'auto',
           placeholder: '검색…',
           noData: '결과 없음',
         },
+        pagination: {
+          previousText: '이전 문서',
+          nextText: '다음 문서',
+          crossChapter: true,
+          crossChapterText: true,
+        },
+        plugins: [
+          function (hook) {
+            hook.doneEach(function () {
+              var root = document.querySelector('.markdown-section');
+              if (!root || !window.Prism) return;
+              root.querySelectorAll('pre > code').forEach(function (el) {
+                if (!/(^|\s)(lang(uage)?)-/.test(el.className || '')) return;
+                try {
+                  Prism.highlightElement(el);
+                } catch (e) {}
+              });
+            });
+          },
+        ],
       };
+
+      function applyDocsifyTheme(key) {
+        if (themeKeys.indexOf(key) < 0) key = 'vue';
+        var link = document.getElementById('docsify-theme-link');
+        if (link) {
+          link.href =
+            'https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/' + key + '.css';
+        }
+        document.documentElement.setAttribute('data-theme', key);
+        localStorage.setItem('docsify-theme', key);
+        var sel = document.getElementById('docsify-theme-select');
+        if (sel) sel.value = key;
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var saved = localStorage.getItem('docsify-theme') || 'vue';
+        var sel = document.getElementById('docsify-theme-select');
+        if (sel) {
+          if (themeKeys.indexOf(saved) >= 0) sel.value = saved;
+          sel.addEventListener('change', function () {
+            applyDocsifyTheme(sel.value);
+          });
+        }
+      });
     })();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
 </body>
 </html>

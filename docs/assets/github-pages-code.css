@@ -1,10 +1,8 @@
 /**
- * GitHub Pages (Docsify) — 테마(vue / dark / buble 등)를 바꿔도
- * 소스·인라인 코드가 읽을 수 있게 고정·중립 스타일.
- * index.html에서 테마 CSS 다음에 로드.
+ * 블록 코드: 항상 다크 패널 + Prism (테마와 무관하게 가독성 유지)
+ * 인라인 코드는 docs-theme.css에서 data-theme별 처리
  */
 
-/* ---------- 블록 코드: 항상 다크 패널 (문서 테마와 무관) ---------- */
 .markdown-section pre {
   background: #1e1e1e !important;
   border: 1px solid #3c3c3c;
@@ -23,7 +21,7 @@
   border-radius: 0 !important;
 }
 
-/* Prism / Docsify 구문 강조 (VS Code Dark+ 계열) */
+/* Prism — C# / Unity 문서용 (Dark+ 스타일) */
 .markdown-section pre .token.comment,
 .markdown-section pre .token.prolog,
 .markdown-section pre .token.doctype,
@@ -90,20 +88,4 @@
 
 .markdown-section pre code:not([class*="language-"]) {
   color: #d4d4d4 !important;
-}
-
-/* ---------- 인라인 코드: 본문 글자색 따름 + 중립 배경 (라이트·다크 공통) ---------- */
-.markdown-section :not(pre) > code {
-  font-family: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
-  font-size: 0.9em;
-  padding: 0.2em 0.45em;
-  border-radius: 6px;
-  color: inherit !important;
-  background: rgba(128, 128, 128, 0.14) !important;
-  border: 1px solid rgba(128, 128, 128, 0.28);
-}
-
-/* 링크 안 인라인 코드 */
-.markdown-section a code {
-  color: inherit !important;
 }
